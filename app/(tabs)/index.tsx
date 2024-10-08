@@ -1,11 +1,39 @@
 import { ThemedText } from "@/components/ThemedText";
 import Card from "@/components/ui/card";
+import { Api, Item } from "@/services/api/apt";
 import { Link } from "expo-router";
-import React from "react";
-import { Pressable, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  Pressable,
+  RefreshControl,
+  ScrollView,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+  const [items, setItems] = useState<Item[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+
+  const fetchItems = async () => {
+    const api = new Api();
+    setLoading(true);
+    const data = await api.fetchItems();
+    setItems(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchItems();
+    setRefreshing(false);
+  };
+
   return (
     <SafeAreaView edges={["right", "left", "top"]} style={{ flex: 1 }}>
       <ThemedText
@@ -23,94 +51,40 @@ export default function Index() {
           margin: 0,
           flexGrow: 1,
         }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
-        <Link
-          href={{
-            pathname: "/details/[id]",
-            params: {
-              id: "landscape",
-              title: "Beautiful Landscape",
-              image:
-                "https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            },
-          }}
-          style={{ width: "100%", flex: 1, flexGrow: 1 }}
-          asChild
-        >
-          <Pressable>
-            <Card
-              title="Beautiful Landscape"
-              description="This is a description of the beautiful landscape."
-              imageUri="https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            />
-          </Pressable>
-        </Link>
-
-        <Link
-          href={{
-            pathname: "/details/[id]",
-            params: {
-              id: "mountain",
-              title: "Majestic Mountain",
-              image:
-                "https://images.pexels.com/photos/20821607/pexels-photo-20821607/free-photo-of-snow-in-barren-mountains.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            },
-          }}
-          style={{ width: "100%", flex: 1, flexGrow: 1 }}
-          asChild
-        >
-          <Pressable>
-            <Card
-              title="Majestic Mountain"
-              description="An awe-inspiring view of the mountains."
-              imageUri="https://images.pexels.com/photos/20821607/pexels-photo-20821607/free-photo-of-snow-in-barren-mountains.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            />
-          </Pressable>
-        </Link>
-
-        <Link
-          href={{
-            pathname: "/details/[id]",
-            params: {
-              id: "city",
-              title: "City Skyline",
-              image:
-                "https://images.pexels.com/photos/7613/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            },
-          }}
-          style={{ width: "100%", flex: 1, flexGrow: 1 }}
-          asChild
-        >
-          <Pressable>
-            <Card
-              title="City Skyline"
-              description="The bustling life of a vibrant city."
-              imageUri="https://images.pexels.com/photos/7613/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            />
-          </Pressable>
-        </Link>
-
-        <Link
-          href={{
-            pathname: "/details/[id]",
-            params: {
-              id: "forest",
-              title: "Enchanting Forest",
-              image:
-                "https://images.pexels.com/photos/418831/pexels-photo-418831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            },
-          }}
-          style={{ width: "100%", flex: 1, flexGrow: 1 }}
-          asChild
-        >
-          <Pressable>
-            <Card
-              title="Enchanting Forest"
-              description="A serene view of a lush green forest."
-              imageUri="https://images.pexels.com/photos/418831/pexels-photo-418831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            />
-          </Pressable>
-        </Link>
+        {loading ? (
+          <ActivityIndicator
+            style={{
+              margin: "auto",
+            }}
+            size="large"
+          />
+        ) : (
+          items.map((item) => (
+            <Link
+              key={item.id}
+              href={{
+                pathname: "/details/[id]",
+                params: {
+                  id: item.id,
+                },
+              }}
+              style={{ width: "100%", flex: 1, flexGrow: 1 }}
+              asChild
+            >
+              <Pressable>
+                <Card
+                  title={item.title}
+                  description={item.description}
+                  imageUri={item.imageUri}
+                />
+              </Pressable>
+            </Link>
+          ))
+        )}
       </ScrollView>
     </SafeAreaView>
   );

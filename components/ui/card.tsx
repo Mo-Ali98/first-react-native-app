@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Image, StyleSheet, Text, useColorScheme, View } from "react-native";
+import { Image, StyleSheet, useColorScheme, View } from "react-native";
+import { ThemedText } from "../ThemedText";
 
 interface CardProps {
   title: string;
@@ -18,23 +19,25 @@ const Card: React.FC<CardProps> = ({ title, description, imageUri }) => {
         theme === "dark" ? styles.cardDark : styles.cardLight,
       ]}
     >
-      <Image src={imageUri} style={styles.image} />
-      <Text
-        style={[
-          styles.title,
-          theme === "dark" ? styles.titleDark : styles.titleLight,
-        ]}
-      >
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.description,
-          theme === "dark" ? styles.descriptionDark : styles.descriptionLight,
-        ]}
-      >
-        {description}
-      </Text>
+      <Image className="rounded-md h-40" src={imageUri} />
+      <View>
+        <ThemedText
+          style={[
+            styles.title,
+            theme === "dark" ? styles.titleDark : styles.titleLight,
+          ]}
+        >
+          {title}
+        </ThemedText>
+        <ThemedText
+          style={[
+            styles.description,
+            theme === "dark" ? styles.descriptionDark : styles.descriptionLight,
+          ]}
+        >
+          {description}
+        </ThemedText>
+      </View>
     </View>
   );
 };
@@ -46,6 +49,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     padding: 18,
     minWidth: "100%",
+    display: "flex",
+    gap: 12,
   },
   cardLight: {
     backgroundColor: "#fff",
@@ -64,7 +69,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    padding: 8,
   },
   titleLight: {
     color: "#000",
@@ -74,7 +78,6 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
-    paddingHorizontal: 8,
   },
   descriptionLight: {
     color: "#666",
