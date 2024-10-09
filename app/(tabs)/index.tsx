@@ -1,4 +1,3 @@
-import { ThemedText } from "@/components/ThemedText";
 import Card from "@/components/ui/card";
 import { Api, Item } from "@/services/api/apt";
 import { Link } from "expo-router";
@@ -8,6 +7,7 @@ import {
   Pressable,
   RefreshControl,
   ScrollView,
+  Text,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -36,24 +36,14 @@ export default function Index() {
 
   return (
     <SafeAreaView edges={["right", "left", "top"]} style={{ flex: 1 }}>
-      <ThemedText
-        type="title"
-        style={{
-          padding: 16,
-          paddingHorizontal: 16,
-        }}
-      >
+      <Text className="font-bold text-6xl text-black dark:text-white px-4">
         Home
-      </ThemedText>
+      </Text>
       <ScrollView
-        contentContainerStyle={{
-          paddingHorizontal: 16,
-          margin: 0,
-          flexGrow: 1,
-        }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        className="p-4"
       >
         {loading ? (
           <ActivityIndicator
@@ -72,7 +62,6 @@ export default function Index() {
                   id: item.id,
                 },
               }}
-              style={{ width: "100%", flex: 1, flexGrow: 1 }}
               asChild
             >
               <Pressable>

@@ -1,15 +1,9 @@
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Api, Item } from "@/services/api/apt";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { ActivityIndicator, Image, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DetailsScreen() {
@@ -39,7 +33,7 @@ export default function DetailsScreen() {
       <SafeAreaView edges={["right", "left", "top"]} style={{ flex: 1 }}>
         <ParallaxScrollView
           headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-          headerImage={<Image src={""} style={styles.headerImage} />}
+          headerImage={<Image src={""} className="h-full w-full absolute" />}
         >
           <ActivityIndicator
             style={{
@@ -57,15 +51,11 @@ export default function DetailsScreen() {
       <SafeAreaView edges={["right", "left", "top"]} style={{ flex: 1 }}>
         <ParallaxScrollView
           headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-          headerImage={<Image src={""} style={styles.headerImage} />}
+          headerImage={<Image src={""} className="h-full w-full absolute" />}
         >
-          <ThemedText
-            style={{
-              margin: "auto",
-            }}
-          >
+          <Text className="font-bold text-xl text-black dark:text-white m-auto">
             Not available
-          </ThemedText>
+          </Text>
         </ParallaxScrollView>
       </SafeAreaView>
     );
@@ -76,56 +66,31 @@ export default function DetailsScreen() {
       <ParallaxScrollView
         headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
         headerImage={
-          <Image src={item.imageUri as string} style={styles.headerImage} />
+          <Image
+            src={item.imageUri as string}
+            className="h-full w-full absolute"
+          />
         }
       >
-        <ThemedView style={styles.titleContainer}>
-          <TouchableOpacity
-            onPress={() => router.back()}
-            style={styles.backButton}
-          >
-            <ThemedText
-              lightColor={styles.backButtonText.color}
-              darkColor={styles.darkBackBtn.color}
-            >
+        <ThemedView>
+          <TouchableOpacity onPress={() => router.back()}>
+            <Text className="text-blue-600 text-xl font-semibold mb-5">
               Back
-            </ThemedText>
+            </Text>
           </TouchableOpacity>
 
-          <ThemedText type="subtitle">{item.title}</ThemedText>
-          <ThemedText className="py-3" type="defaultSemiBold">
+          <Text className="text-4xl font-bold text-black dark:text-white">
+            {item.title}
+          </Text>
+          <Text className="my-3 text-black dark:text-white font-semibold">
             {item.description}
-          </ThemedText>
+          </Text>
 
-          <ThemedText>{item.detailedDescription}</ThemedText>
+          <Text className="text-black dark:text-white ">
+            {item.detailedDescription}
+          </Text>
         </ThemedView>
       </ParallaxScrollView>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "column",
-    gap: 8,
-  },
-  header: {
-    flexDirection: "column",
-  },
-  backButton: {
-    padding: 8,
-  },
-  backButtonText: {
-    fontSize: 18,
-    color: "blue",
-  },
-  darkBackBtn: {
-    fontSize: 18,
-    color: "#DD6031",
-  },
-  headerImage: {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-  },
-});

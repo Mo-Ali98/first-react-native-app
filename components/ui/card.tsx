@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Image, StyleSheet, useColorScheme, View } from "react-native";
-import { ThemedText } from "../ThemedText";
+import { Image, Text, View } from "react-native";
 
 interface CardProps {
   title: string;
@@ -10,81 +9,19 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, description, imageUri }) => {
-  const theme = useColorScheme() ?? "light";
-
   return (
-    <View
-      style={[
-        styles.card,
-        theme === "dark" ? styles.cardDark : styles.cardLight,
-      ]}
-    >
+    <View className="flex gap-3 p-5 bg-white dark:bg-gray-800 rounded-lg min-w-full mb-5">
       <Image className="rounded-md h-40" src={imageUri} />
       <View>
-        <ThemedText
-          style={[
-            styles.title,
-            theme === "dark" ? styles.titleDark : styles.titleLight,
-          ]}
-        >
+        <Text className="font-bold text-2xl text-black dark:text-white">
           {title}
-        </ThemedText>
-        <ThemedText
-          style={[
-            styles.description,
-            theme === "dark" ? styles.descriptionDark : styles.descriptionLight,
-          ]}
-        >
+        </Text>
+        <Text className="text-md text-black dark:text-white">
           {description}
-        </ThemedText>
+        </Text>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    borderRadius: 8,
-    overflow: "hidden",
-    marginBottom: 16,
-    padding: 18,
-    minWidth: "100%",
-    display: "flex",
-    gap: 12,
-  },
-  cardLight: {
-    backgroundColor: "#fff",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-  },
-  cardDark: {
-    backgroundColor: "#333",
-  },
-  image: {
-    width: "100%",
-    height: 150,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  titleLight: {
-    color: "#000",
-  },
-  titleDark: {
-    color: "#fff",
-  },
-  description: {
-    fontSize: 14,
-  },
-  descriptionLight: {
-    color: "#666",
-  },
-  descriptionDark: {
-    color: "#ccc",
-  },
-});
 
 export default Card;
