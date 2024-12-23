@@ -18,22 +18,22 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: "yarn"
+          cache: "npm"
 
       - name: 📦 Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install
 
       - name: 🔍 Lint check
-        run: yarn lint
+        run: npm run lint
 
       - name: 🧪 Type check
-        run: yarn tsc
+        run: npm run tsc
 
       - name: 🏗 Build app
-        run: yarn expo prebuild
+        run: npx expo prebuild
 
       - name: 📱 Build for iOS
-        run: yarn expo build:ios
+        run: npx expo build:ios
 
       - name: 🤖 Build for Android
-        run: yarn expo build:android
+        run: npx expo build:android
