@@ -1,4 +1,5 @@
 import Card from "@/components/ui/card";
+import { Colors } from "@/constants/Colors";
 import { Api, Item } from "@/services/api/apt";
 import { Link } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -8,10 +9,12 @@ import {
   RefreshControl,
   ScrollView,
   Text,
+  useColorScheme,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+  const colorScheme = useColorScheme();
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -35,7 +38,13 @@ export default function Index() {
   };
 
   return (
-    <SafeAreaView edges={["right", "left", "top"]} style={{ flex: 1 }}>
+    <SafeAreaView
+      edges={["right", "left", "top"]}
+      style={{
+        flex: 1,
+        backgroundColor: Colors[colorScheme ?? "light"].background,
+      }}
+    >
       <Text className="font-bold text-6xl text-black dark:text-white px-4">
         Home
       </Text>

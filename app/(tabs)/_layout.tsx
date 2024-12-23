@@ -11,8 +11,17 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tabIconSelected,
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+          borderTopWidth: 0,
+          elevation: 4,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: -1 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+        },
       }}
     >
       <Tabs.Screen
