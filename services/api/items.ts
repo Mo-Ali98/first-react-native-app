@@ -78,7 +78,7 @@ export class Api {
         "https://images.pexels.com/photos/1470171/pexels-photo-1470171.jpeg",
       description: "Perfectly manicured Japanese garden.",
       detailedDescription:
-        "Experience tranquility in this meticulously designed garden space, where centuries of Japanese gardening traditions come to life. Created by master gardener Tanaka Hiroshi in 1985, each element has been carefully positioned according to ancient principles of balance and harmony. The garden features hand-selected rocks from local quarries, carefully pruned bonsai trees over 100 years old, and a koi pond fed by a natural spring. Traditional elements include a wooden tea house, authentic stone lanterns, and a bamboo water feature whose gentle rhythmic sounds promote meditation. The garden changes dramatically with each season: cherry blossoms in spring, lush greenery in summer, vibrant maples in autumn, and snow-covered sculptural forms in winter.",
+        "Experience tranquillity in this meticulously designed garden space, where centuries of Japanese gardening traditions come to life. Created by master gardener Tanaka Hiroshi in 1985, each element has been carefully positioned according to ancient principles of balance and harmony. The garden features hand-selected rocks from local quarries, carefully pruned bonsai trees over 100 years old, and a koi pond fed by a natural spring. Traditional elements include a wooden tea house, authentic stone lanterns, and a bamboo water feature whose gentle rhythmic sounds promote meditation. The garden changes dramatically with each season: cherry blossoms in spring, lush greenery in summer, vibrant maples in autumn, and snow-covered sculptural forms in winter.",
     },
     {
       id: 9,
@@ -100,7 +100,7 @@ export class Api {
     },
     {
       id: 11,
-      title: "City Nightscape",
+      title: "City Night-scape",
       imageUri:
         "https://images.pexels.com/photos/316902/pexels-photo-316902.jpeg",
       description: "Urban skyline illuminated at night.",
@@ -123,7 +123,7 @@ export class Api {
         "https://images.pexels.com/photos/1808329/pexels-photo-1808329.jpeg",
       description: "Vibrant fall foliage in the park.",
       detailedDescription:
-        "Nature's palette comes alive in this 200-acre arboretum, where carefully curated collections of maple, oak, and beech trees create a spectacular autumn display. The park features over 500 species of deciduous trees, each selected for its unique fall coloring, creating a tapestry of reds, oranges, yellows, and purples. A network of accessible trails winds through the grounds, including elevated walkways that offer breathtaking canopy-level views. The park's microclimate creates one of the longest fall color seasons in the region, typically lasting from late September through early November. Educational stations along the paths explain the science behind fall colors, while designated photography points offer perfect vantage points for capturing the seasonal spectacle. Early morning visitors often encounter local wildlife, including deer and various bird species, among the misty trails.",
+        "Nature's palette comes alive in this 200-acre arboretum, where carefully curated collections of maple, oak, and beech trees create a spectacular autumn display. The park features over 500 species of deciduous trees, each selected for its unique fall colouring, creating a tapestry of reds, oranges, yellows, and purples. A network of accessible trails winds through the grounds, including elevated walkways that offer breathtaking canopy-level views. The park's microclimate creates one of the longest fall color seasons in the region, typically lasting from late September through early November. Educational stations along the paths explain the science behind fall colors, while designated photography points offer perfect vantage points for capturing the seasonal spectacle. Early morning visitors often encounter local wildlife, including deer and various bird species, among the misty trails.",
     },
     {
       id: 14,
@@ -132,7 +132,7 @@ export class Api {
         "https://images.pexels.com/photos/931007/pexels-photo-931007.jpeg",
       description: "Powerful cascade in tropical setting.",
       detailedDescription:
-        "Feel the raw power of nature as water crashes over ancient rocks in this magnificent 200-foot waterfall. The cascade, formed during the last ice age, thunders down three distinct tiers of volcanic basalt, creating a constant mist that nurtures a unique microenvironment of rare ferns and mosses. A series of viewing platforms provides different perspectives of the falls, from the misty base to the dramatic crest. The surrounding rainforest features old-growth trees draped in epiphytes, creating an otherworldly atmosphere. During rainy seasons, the falls reach their full dramatic potential, while in drier months, visitors can safely explore some of the rock formations. The site includes interpretive trails explaining the geological and ecological significance of the area, and the visitor center offers displays about local indigenous peoples' historical connections to this sacred site.",
+        "Feel the raw power of nature as water crashes over ancient rocks in this magnificent 200-foot waterfall. The cascade, formed during the last ice age, thunders down three distinct tiers of volcanic basalt, creating a constant mist that nurtures a unique micro environment of rare ferns and mosses. A series of viewing platforms provides different perspectives of the falls, from the misty base to the dramatic crest. The surrounding rainforest features old-growth trees draped in epiphytes, creating an otherworldly atmosphere. During rainy seasons, the falls reach their full dramatic potential, while in drier months, visitors can safely explore some of the rock formations. The site includes interpretive trails explaining the geological and ecological significance of the area, and the visitor center offers displays about local indigenous peoples' historical connections to this sacred site.",
     },
     {
       id: 15,
@@ -145,7 +145,7 @@ export class Api {
     },
     {
       id: 16,
-      title: "Cozy Coffee Shop",
+      title: "Cosy Coffee Shop",
       imageUri:
         "https://images.pexels.com/photos/1855214/pexels-photo-1855214.jpeg",
       description: "Warm and inviting cafe interior.",
@@ -195,7 +195,7 @@ export class Api {
         "https://images.pexels.com/photos/3609832/pexels-photo-3609832.jpeg",
       description: "Rustic retreat in the mountains.",
       detailedDescription:
-        "Escape to this cozy hideaway surrounded by pristine wilderness...",
+        "Escape to this cosy hideaway surrounded by pristine wilderness...",
     },
     {
       id: 22,
