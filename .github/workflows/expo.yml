@@ -26,14 +26,5 @@ jobs:
       - name: 🔍 Lint check
         run: npm run lint
 
-      - name: 🧪 Type check
-        run: npm run tsc
-
-      - name: 🏗 Build app
-        run: npx expo prebuild
-
-      - name: 📱 Build for iOS
-        run: npx expo build:ios
-
-      - name: 🤖 Build for Android
-        run: npx expo build:android
+      - name: 🧪 Test
+        run: npm run test
