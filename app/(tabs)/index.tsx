@@ -1,8 +1,8 @@
 import Card from "@/components/ui/card";
 import { Colors } from "@/constants/Colors";
-import { Api, Item } from "@/services/api/apt";
+import { useItems } from "@/hooks/useItems";
 import { Link } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   Pressable,
@@ -15,25 +15,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const colorScheme = useColorScheme();
-  const [items, setItems] = useState<Item[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
-  const fetchItems = async () => {
-    const api = new Api();
-    setLoading(true);
-    const data = await api.fetchItems();
-    setItems(data);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchItems();
-  }, []);
+  const { items, isLoading, refetch } = useItems();
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await fetchItems();
+    await refetch();
     setRefreshing(false);
   };
 
@@ -54,7 +42,7 @@ export default function Index() {
         }
         className="p-4"
       >
-        {loading ? (
+        {isLoading ? (
           <ActivityIndicator
             style={{
               margin: "auto",

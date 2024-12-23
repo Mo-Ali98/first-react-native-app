@@ -1,14 +1,21 @@
 import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useRef, useState } from "react";
-import { Animated, StyleSheet, TextInput, useColorScheme } from "react-native";
+import {
+  Animated,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  useColorScheme,
+} from "react-native";
 
 interface SearchBarProps {
   value: string;
   onChangeText: (text: string) => void;
+  onSubmit?: () => void;
 }
 
-export function SearchBar({ value, onChangeText }: SearchBarProps) {
+export function SearchBar({ value, onChangeText, onSubmit }: SearchBarProps) {
   const colorScheme = useColorScheme();
   const searchAnimation = useRef(new Animated.Value(1)).current;
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -27,6 +34,10 @@ export function SearchBar({ value, onChangeText }: SearchBarProps) {
       toValue: 1,
       useNativeDriver: true,
     }).start();
+  };
+
+  const handleClear = () => {
+    onChangeText("");
   };
 
   const dynamicStyles = {
@@ -71,7 +82,18 @@ export function SearchBar({ value, onChangeText }: SearchBarProps) {
         onBlur={onSearchBlur}
         value={value}
         onChangeText={onChangeText}
+        returnKeyType="search"
+        onSubmitEditing={onSubmit}
       />
+      {value.length > 0 && (
+        <Pressable onPress={handleClear}>
+          <Ionicons
+            name="close-circle"
+            size={20}
+            color={Colors[colorScheme ?? "light"].text}
+          />
+        </Pressable>
+      )}
     </Animated.View>
   );
 }

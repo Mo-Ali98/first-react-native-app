@@ -1,9 +1,9 @@
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
-import { Api, Item } from "@/services/api/apt";
+import { useItems } from "@/hooks/useItems";
 import { router, useLocalSearchParams } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ActivityIndicator,
   Image,
@@ -14,29 +14,13 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DetailsScreen() {
-  const { id } = useLocalSearchParams();
   const colorScheme = useColorScheme();
+  const { id } = useLocalSearchParams();
+  const itemId = Array.isArray(id) ? parseInt(id[0]) : parseInt(id);
 
-  const [item, setItem] = useState<Item | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { item, isLoading } = useItems(itemId);
 
-  useEffect(() => {
-    const api = new Api();
-
-    // Convert id to a number if it's a string
-    const itemId = Array.isArray(id) ? parseInt(id[0]) : parseInt(id);
-
-    if (!isNaN(itemId)) {
-      api.fetchItemById(itemId).then((data) => {
-        setItem(data);
-        setLoading(false);
-      });
-    } else {
-      setLoading(false); // Handle the case where id isn't valid
-    }
-  }, [id, item, loading]);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <SafeAreaView
         edges={["right", "left", "top"]}
