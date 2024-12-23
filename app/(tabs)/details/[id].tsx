@@ -1,13 +1,21 @@
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedView } from "@/components/ThemedView";
+import { Colors } from "@/constants/Colors";
 import { Api, Item } from "@/services/api/apt";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Image, Text, TouchableOpacity } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams();
+  const colorScheme = useColorScheme();
 
   const [item, setItem] = useState<Item | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
@@ -30,9 +38,18 @@ export default function DetailsScreen() {
 
   if (loading) {
     return (
-      <SafeAreaView edges={["right", "left", "top"]} style={{ flex: 1 }}>
+      <SafeAreaView
+        edges={["right", "left", "top"]}
+        style={{
+          flex: 1,
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+        }}
+      >
         <ParallaxScrollView
-          headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+          headerBackgroundColor={{
+            light: Colors[colorScheme ?? "light"].background,
+            dark: Colors[colorScheme ?? "light"].background,
+          }}
           headerImage={<Image src={""} className="h-full w-full absolute" />}
         >
           <ActivityIndicator
@@ -48,9 +65,18 @@ export default function DetailsScreen() {
 
   if (!item) {
     return (
-      <SafeAreaView edges={["right", "left", "top"]} style={{ flex: 1 }}>
+      <SafeAreaView
+        edges={["right", "left", "top"]}
+        style={{
+          flex: 1,
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+        }}
+      >
         <ParallaxScrollView
-          headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+          headerBackgroundColor={{
+            light: Colors[colorScheme ?? "light"].background,
+            dark: Colors[colorScheme ?? "light"].background,
+          }}
           headerImage={<Image src={""} className="h-full w-full absolute" />}
         >
           <Text className="font-bold text-xl text-black dark:text-white m-auto">
@@ -62,9 +88,18 @@ export default function DetailsScreen() {
   }
 
   return (
-    <SafeAreaView edges={["right", "left", "top"]} style={{ flex: 1 }}>
+    <SafeAreaView
+      edges={["right", "left", "top"]}
+      style={{
+        flex: 1,
+        backgroundColor: Colors[colorScheme ?? "light"].background,
+      }}
+    >
       <ParallaxScrollView
-        headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+        headerBackgroundColor={{
+          light: Colors[colorScheme ?? "light"].background,
+          dark: Colors[colorScheme ?? "light"].background,
+        }}
         headerImage={
           <Image
             src={item.imageUri as string}
