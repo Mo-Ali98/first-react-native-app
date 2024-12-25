@@ -1,7 +1,9 @@
 import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { useItems } from "@/hooks/useItems";
+import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
 import {
@@ -34,7 +36,9 @@ export default function DetailsScreen() {
             light: Colors[colorScheme ?? "light"].background,
             dark: Colors[colorScheme ?? "light"].background,
           }}
-          headerImage={<Image src={""} className="h-full w-full absolute" />}
+          headerImage={
+            <Image src={""} className="h-full w-full absolute center-content" />
+          }
         >
           <ActivityIndicator
             style={{
@@ -61,7 +65,9 @@ export default function DetailsScreen() {
             light: Colors[colorScheme ?? "light"].background,
             dark: Colors[colorScheme ?? "light"].background,
           }}
-          headerImage={<Image src={""} className="h-full w-full absolute" />}
+          headerImage={
+            <Image src={""} className="h-full w-full absolute center-content" />
+          }
         >
           <Text className="font-bold text-xl text-black dark:text-white m-auto">
             Not available
@@ -92,22 +98,37 @@ export default function DetailsScreen() {
         }
       >
         <ThemedView>
-          <TouchableOpacity onPress={() => router.back()}>
-            <Text className="text-blue-600 text-xl font-semibold mb-5">
+          <TouchableOpacity
+            onPress={() => router.back()}
+            className="flex-row items-center mb-5"
+          >
+            <Ionicons
+              name="chevron-back"
+              size={24}
+              color={Colors[colorScheme ?? "light"].tint}
+            />
+            <ThemedText
+              type="link"
+              className="text-[17px] font-semibold ml-1"
+              style={{ color: Colors[colorScheme ?? "light"].tint }}
+            >
               Back
-            </Text>
+            </ThemedText>
           </TouchableOpacity>
 
-          <Text className="text-4xl font-bold text-black dark:text-white">
+          <ThemedText
+            type="subtitle"
+            className="text-black dark:text-white mb-5"
+          >
             {item.title}
-          </Text>
-          <Text className="my-3 text-black dark:text-white font-semibold">
+          </ThemedText>
+          <ThemedText type="paragraph" className="text-black dark:text-white">
             {item.description}
-          </Text>
+          </ThemedText>
 
-          <Text className="text-black dark:text-white ">
+          <ThemedText type="paragraph" className="text-black dark:text-white ">
             {item.detailedDescription}
-          </Text>
+          </ThemedText>
         </ThemedView>
       </ParallaxScrollView>
     </SafeAreaView>

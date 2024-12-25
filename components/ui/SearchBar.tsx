@@ -4,18 +4,26 @@ import { useRef, useState } from "react";
 import {
   Animated,
   Pressable,
+  StyleProp,
   StyleSheet,
   TextInput,
   useColorScheme,
+  ViewStyle,
 } from "react-native";
 
 interface SearchBarProps {
   value: string;
   onChangeText: (text: string) => void;
   onSubmit?: () => void;
+  style?: StyleProp<ViewStyle>;
 }
 
-export function SearchBar({ value, onChangeText, onSubmit }: SearchBarProps) {
+export function SearchBar({
+  value,
+  onChangeText,
+  onSubmit,
+  style,
+}: SearchBarProps) {
   const colorScheme = useColorScheme();
   const searchAnimation = useRef(new Animated.Value(1)).current;
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -67,6 +75,7 @@ export function SearchBar({ value, onChangeText, onSubmit }: SearchBarProps) {
         styles.searchContainer,
         dynamicStyles.searchContainer,
         { transform: [{ scale: searchAnimation }], zIndex: 2 },
+        style,
       ]}
     >
       <Ionicons

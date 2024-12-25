@@ -1,6 +1,8 @@
+import { ThemedText } from "@/components/ThemedText";
 import Card from "@/components/ui/card";
 import { Colors } from "@/constants/Colors";
 import { useItems } from "@/hooks/useItems";
+import { todaysDate } from "@/utils/utils";
 import { Link } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -8,8 +10,8 @@ import {
   Pressable,
   RefreshControl,
   ScrollView,
-  Text,
   useColorScheme,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -33,44 +35,45 @@ export default function Index() {
         backgroundColor: Colors[colorScheme ?? "light"].background,
       }}
     >
-      <Text className="font-bold text-6xl text-black dark:text-white px-4">
-        Home
-      </Text>
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        className="p-4"
+        contentContainerStyle={{ marginTop: 20 }}
       >
-        {isLoading ? (
-          <ActivityIndicator
-            style={{
-              margin: "auto",
-            }}
-            size="large"
-          />
-        ) : (
-          items.map((item) => (
-            <Link
-              key={item.id}
-              href={{
-                pathname: "/details/[id]",
-                params: {
-                  id: item.id,
-                },
-              }}
-              asChild
-            >
-              <Pressable>
-                <Card
-                  title={item.title}
-                  description={item.description}
-                  imageUri={item.imageUri}
-                />
-              </Pressable>
-            </Link>
-          ))
-        )}
+        <View className="px-4">
+          <ThemedText
+            style={{ marginBottom: 10 }}
+            className="!text-gray-500 dark:!text-gray-400"
+          >
+            {todaysDate()}
+          </ThemedText>
+          <ThemedText type="title" style={{ marginBottom: 20 }}>
+            Home
+          </ThemedText>
+          {isLoading ? (
+            <ActivityIndicator size="large" />
+          ) : (
+            items.map((item) => (
+              <Link
+                key={item.id}
+                href={{
+                  pathname: "/details/[id]",
+                  params: { id: item.id },
+                }}
+                asChild
+              >
+                <Pressable>
+                  <Card
+                    title={item.title}
+                    description={item.description}
+                    imageUri={item.imageUri}
+                  />
+                </Pressable>
+              </Link>
+            ))
+          )}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

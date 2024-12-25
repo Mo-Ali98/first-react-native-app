@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Image, Text, View } from "react-native";
+import { Image, useColorScheme, View } from "react-native";
+import { ThemedText } from "../ThemedText";
 
 interface CardProps {
   title: string;
@@ -9,16 +10,22 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, description, imageUri }) => {
+  const theme = useColorScheme() ?? "light";
+
   return (
-    <View className="flex gap-3 p-5 bg-white dark:bg-gray-800 rounded-lg min-w-full mb-5">
+    <View
+      className={`flex gap-3 p-5 rounded-lg min-w-full mb-5 ${
+        theme === "light" ? "bg-white" : "bg-gray-800"
+      }`}
+    >
       <Image className="rounded-md h-40" src={imageUri} />
       <View>
-        <Text className="font-bold text-2xl text-black dark:text-white">
+        <ThemedText type="subtitle" className="text-black dark:text-white">
           {title}
-        </Text>
-        <Text className="text-md text-black dark:text-white">
+        </ThemedText>
+        <ThemedText type="paragraph" className="text-black dark:text-white">
           {description}
-        </Text>
+        </ThemedText>
       </View>
     </View>
   );

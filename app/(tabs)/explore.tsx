@@ -9,12 +9,12 @@ import { useState } from "react";
 import {
   ActivityIndicator,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   useColorScheme,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ExploreScreen() {
   const { items, isLoading } = useItems();
@@ -38,6 +38,7 @@ export default function ExploreScreen() {
 
   return (
     <SafeAreaView
+      edges={["right", "left", "top"]}
       style={[
         styles.container,
         { backgroundColor: Colors[colorScheme ?? "light"].background },
@@ -47,6 +48,7 @@ export default function ExploreScreen() {
         value={searchQuery}
         onChangeText={handleSearchChange}
         onSubmit={() => filterItems(searchQuery)}
+        style={{ marginTop: 20 }}
       />
       <ScrollView style={[styles.content, { zIndex: 0 }]}>
         {isLoading
