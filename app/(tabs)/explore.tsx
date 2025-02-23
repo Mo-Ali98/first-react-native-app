@@ -5,7 +5,7 @@ import { Colors } from "@/constants/Colors";
 import { useItems } from "@/hooks/useItems";
 import { Item } from "@/services/api/items";
 import { Link } from "expo-router";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   Pressable,
